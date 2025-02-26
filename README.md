@@ -1,2 +1,2 @@
-# Intelig-ncia-Artificial-
+# Inteligencia-Artificial-
 Tudo sobre I.A
