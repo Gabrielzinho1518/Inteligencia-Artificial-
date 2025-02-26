@@ -1,0 +1,66 @@
+Inteligência Artificial 
+  - Técnicas de resolução de problemas: 
+    - Que tipo de problema? 
+      - (A) Diagnóstico ou reconhecimento de padrões
+        - Tomada de decisões 
+          - área médica
+        - processamento de imagens 
+
+      - (B) Definição de pessoas até o estado final ( empacotamento )
+          - área de jogos 
+          - linhas de montagem 
+
+
+  - Sistemas de Comportamento Inteligente
+    - Base de conhecimento ( gigantesca )
+    - fatos 
+    - Raciocínio automatizado ( dedução de indução )
+    - Aprendizagem - > reconhecimento de padrões por treino 
+
+  Áreas
+    - (A) Métodos de busca ( solução de problemas )
+      -profundidade, amplitude, subida de encosta, gulosa, A*
+      - algoritmos genéticos 
+    - (A) (B) Representação de conhecimento 
+      - prolog 
+      - ontologia 
+    - (A) (B) sistemas multiagentes 
+    - (A) redes neurais 
+    - (A) processamento da lingua natural PLN
+
+    Eu pegamos ao computador.
+
+(A) Diagnóstico ou reconhecimento de padrões
+(B) Definição de pessoas até o estado final 
+
+Problemas: 
+  1) resolver o jogo da velha - B
+  2) resolver o problema de mal funcionamento de um computador - A
+  3) resolver o problema de puzzle - B
+  4) fazer a entrega de n pizzas por um moto boy em um tempo mínimo - B
+  5) montar a grade de horários em um curso de graduação - B
+  6) Identificar os instrumentos musicais em uma música - A
+
+Modelar a solução com alguma técnica de IA 
+  1) mapear os estados possíveis do problema 
+    - definir classe e seus atributos 
+    - definir o estado inical e o estado(s) finals(is) 
+  2) mapear os métodos das classes - Regras de Transição 
+  3) mapear as restrições - método ehVálido()
+  4) forma de mapear os visitados - HashSet ou uma árvore 
+    - gerar uma string dos atributos daquele estado / objeto 
+  5) definir o método meta ou objetivo 
+
+Observação: 
+    - Toda vez que um estado / objeto é gerado é preciso fazer 3 testes: 
+1) é válido?
+2) já visitei?
+3) é a meta?  
+
+
+
+
+
+
+
+
