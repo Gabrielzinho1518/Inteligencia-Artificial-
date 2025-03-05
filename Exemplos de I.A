@@ -1,0 +1,22 @@
+4) Uma função que carregue foto, obrigatoriamente, de somente em rosto de uma pessoa. 
+- B
+   - Desafio: 
+      - imagens sobrepostas: 
+
+2) fazer a máquina reconhecer somente um rosto 
+    - treinamento:
+      - imagens positivas : imagens de somente um rosto 
+        - há pacotes / bibliotecas com funções que reconhecem um rosto 
+      - imagens negativas: sem imagens de um rosto somente 
+      - imagens sobrepostas: 
+5) A partir da foto de uma folha de uma planta, informar se a planta está ou não doente.
+  - B
+      - Desafio 
+        - juntar imagens de n tipos de plantas 
+        - para cada tipo de planta, trazer imagens de doentes e não doentes. 
+
+# Resolução de problemas por métodos de busca 
+    - Técnica de IA para encontrar um conjunto de passos a um estado final (conhecido ou não) 
+      - modelagem: estados, regras de transição, restrições, visitados,  função meta 
+      - estratégias para escolher as regras de transição 
+        - 
