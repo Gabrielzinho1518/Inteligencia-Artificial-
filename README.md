@@ -1,4 +1,4 @@
 # Inteligencia-Artificial-
 Tudo sobre I.A
 
-(https://www.institutolatino.com.br/wp-content/uploads/2024/05/ai-generated-8527252_1280-1280x640.jpg)
+![I A](https://github.com/user-attachments/assets/a1f5fc24-0cdf-4aee-9ae9-b89170a48604)
