@@ -1,0 +1,72 @@
+/// </summary>
+public class BuscaBidirecional : Busca
+{
+    /// <summary>
+    /// Busca sem mostrar status
+    /// </summary>
+    public BuscaBidirecional() { }
+
+    /// <summary>
+    /// Busca mostrando status
+    /// </summary>
+    public BuscaBidirecional(MostraStatusConsole ms) : base(ms) { }
+
+    /// <summary>
+    /// Busca a solução por busca bidirecional.
+    /// </summary>
+    public Nodo Busca(Estado inicial, Estado meta)
+    {
+        status.Inicia();
+        usarFechado = false; // tem que usar poda só por ascendência! não pode usar fechados
+
+        List<Nodo> abertosCima = new List<Nodo>();
+        List<Nodo> abertosBaixo = new List<Nodo>();
+
+        abertosCima.Add(new Nodo(inicial, null));
+        Nodo nodoMeta = new Nodo(meta, null);
+        abertosBaixo.Add(nodoMeta);
+
+        while (!parar && abertosCima.Count > 0 && abertosBaixo.Count > 0)
+        {
+            Nodo n = abertosCima[0];
+            abertosCima.RemoveAt(0);
+            status.Explorando(n, abertosCima.Count + abertosBaixo.Count);
+
+            int io = abertosBaixo.IndexOf(n);
+            if (io >= 0)
+            {
+                Nodo nb = abertosBaixo[io];
+                nb.InvertePaternidade();
+                nb.Pai = n.Pai;
+                nodoMeta.SetProfundidade();
+                status.Termina(true);
+                return nodoMeta;
+            }
+            abertosCima.AddRange(Sucessores(n));
+
+            n = abertosBaixo[0];
+            abertosBaixo.RemoveAt(0);
+            status.Explorando(n, abertosCima.Count + abertosBaixo.Count);
+
+            io = abertosCima.IndexOf(n);
+            if (io >= 0)
+            {
+                Nodo nc = abertosCima[io];
+                n.InvertePaternidade();
+                n.Pai = nc.Pai;
+                nodoMeta.SetProfundidade();
+                status.Termina(true);
+                return nodoMeta;
+            }
+            abertosBaixo.AddRange(Antecessores(n));
+        }
+        
+        status.Termina(false);
+        return null;
+    }
+
+    public override string ToString()
+    {
+        return "BBD - busca bidirecional";
+    }
+}
