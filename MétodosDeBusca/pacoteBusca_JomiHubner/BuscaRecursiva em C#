@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+
+namespace Busca
+{
+    /**
+     * Algoritmos de Busca (geral, qualquer problema)
+     * Busca a solução por busca em profundidade.
+     * Implementação recursiva.
+     *
+     * @author Jomi Fred Hübner
+     */
+    public class BuscaRecursiva : BuscaProfundidade
+    {
+        /** busca sem mostrar status */
+        public BuscaRecursiva()
+        {
+        }
+
+        /** busca mostrando status */
+        public BuscaRecursiva(MostraStatusConsole ms) : base(ms)
+        {
+        }
+
+        /**
+         * Busca a solução por busca em profundidade.
+         * ------------
+         *
+         * Como o algoritmo é recursivo, não precisa da lista de abertos.
+         *
+         * max é a profundidade máxima de busca.
+         */
+        public Nodo Busca(Estado inicial)
+        {
+            status.Inicia();
+            InitFechados();
+            Nodo n = BuscaR(new Nodo(inicial, null));
+            status.Termina(n != null);
+            return n;
+        }
+
+        public Nodo BuscaR(Nodo corrente)
+        {
+            if (corrente == null)
+            {
+                return null;
+            }
+
+            status.Explorando(corrente, 0);
+            if (corrente.Estado.EhMeta())
+            {
+                return corrente;
+            }
+
+            if (corrente.GetProfundidade() > profMax || parar)
+            {
+                return null;
+            }
+
+            foreach (var s in Sucessores(corrente))
+            {
+                Nodo n = BuscaR(s);
+                if (n != null)
+                {
+                    return n;
+                }
+            }
+            return null;
+        }
+
+        public override string ToString()
+        {
+            return $"BP - Busca em Profundidade (m={profMax}) - versão recursiva";
+        }
+    }
+}
