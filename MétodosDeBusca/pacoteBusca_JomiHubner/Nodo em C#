@@ -1,0 +1,144 @@
+using System;
+
+namespace Busca
+{
+    /**
+     * Representa um nodo da árvore de busca
+     */
+    public class Nodo : IComparable
+    {
+        public Estado Estado { get; set; }  // o estado
+        public Nodo Pai { get; set; }       // o pai
+        public int Profundidade { get; set; } = 0;
+        public int G { get; set; } = 0;     // custo de ter gerado o nodo (todo o caminho)
+        public int F { get; set; } = -1;    // f = g + h
+
+        public Nodo(Estado e, Nodo p)
+        {
+            Estado = e;
+            Pai = p;
+            if (p == null)
+            {
+                Profundidade = 0;
+                G = e.Custo();
+            }
+            else
+            {
+                Profundidade = p.Profundidade + 1;
+                G = e.Custo() + p.G;
+            }
+        }
+
+        public int GetProfundidade()
+        {
+            return Profundidade;
+        }
+
+        public Estado GetEstado()
+        {
+            return Estado;
+        }
+
+        public Nodo GetPai()
+        {
+            return Pai;
+        }
+
+        /** Retorna o custo acumulado de gerar o nodo */
+        public int Gusto()
+        {
+            return G;
+        }
+
+        /** Custo total */
+        public int Fusto()
+        {
+            if (F == -1)
+            {
+                F = G + ((Heuristica)Estado).H();
+            }
+            return F;
+        }
+
+        public void InvertePaternidade()
+        {
+            if (Pai.Pai != null)
+            {
+                Pai.InvertePaternidade();
+            }
+            Pai.Pai = this;
+        }
+
+        /** Arruma a profundidade de um nodo e de seus pais */
+        public void SetProfundidade()
+        {
+            if (Pai == null)
+            {
+                Profundidade = 0;
+            }
+            else
+            {
+                Pai.SetProfundidade();
+                Profundidade = Pai.Profundidade + 1;
+            }
+        }
+
+        /** Testa se o nodo não tem um ascensor igual a ele */
+        public bool EhDescendenteNovo(Nodo ascensor)
+        {
+            if (ascensor == null)
+            {
+                return true;
+            }
+            else
+            {
+                if (ascensor.Estado.Equals(this.Estado))
+                {
+                    return false;
+                }
+                else
+                {
+                    return EhDescendenteNovo(ascensor.Pai);
+                }
+            }
+        }
+
+        /** Se dois nodos são iguais */
+        public override bool Equals(object obj)
+        {
+            try
+            {
+                Nodo n = (Nodo)obj;
+                return this.Estado.Equals(n.Estado);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return false;
+        }
+
+        /** Utiliza o custo (G) como elemento de ordenação */
+        public int CompareTo(object obj)
+        {
+            try
+            {
+                Nodo outro = (Nodo)obj;
+                if (G > outro.G)
+                {
+                    return 1; // sou maior (fica depois na fila)
+                }
+                else if (G == outro.G)
+                {
+                    return 0; // sou igual
+                }
+                else
+                {
+                    return -1; // sou menor
+                }
+            }
+            catch (Exception e1)
+            {
+                Console.WriteLine(e1);
+            }
+            return 0; // sou i
