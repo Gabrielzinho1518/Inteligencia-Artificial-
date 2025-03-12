@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+
+/// <summary>
+/// Algoritmos de Busca Heurística
+/// </summary>
+public abstract class BuscaHeuristica : Busca
+{
+    /// <summary>
+    /// Busca sem mostrar status
+    /// </summary>
+    public BuscaHeuristica() { }
+
+    /// <summary>
+    /// Busca mostrando status
+    /// </summary>
+    public BuscaHeuristica(MostraStatusConsole ms) : base(ms) { }
+
+    /// <summary>
+    /// Comparador para ordenar os nodos por F
+    /// </summary>
+    protected IComparer<Nodo> GetNodoComparatorF()
+    {
+        return Comparer<Nodo>.Create((no1, no2) =>
+        {
+            try
+            {
+                int f1 = no1.F();
+                int f2 = no2.F();
+                return f1.CompareTo(f2);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return 0;
+        });
+    }
+}
