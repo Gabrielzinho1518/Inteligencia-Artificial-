@@ -1,0 +1,58 @@
+using System;
+using System.Collections.Generic;
+
+namespace Busca
+{
+    /**
+     * Busca a solução por busca em largura.
+     *
+     * @author Jomi Fred Hübner
+     */
+    public class BuscaLargura : Busca
+    {
+        /** busca sem mostrar status */
+        public BuscaLargura()
+        {
+        }
+
+        /** busca mostrando status */
+        public BuscaLargura(MostraStatusConsole ms) : base(ms)
+        {
+        }
+
+        public Nodo Busca(Estado inicial)
+        {
+            status.Inicia();
+            InitFechados();
+
+            Queue<Nodo> abertos = new Queue<Nodo>();
+            abertos.Enqueue(new Nodo(inicial, null));
+
+            while (!parar && abertos.Count > 0)
+            {
+                //System.out.print("abertos " + abertos);
+                Nodo n = abertos.Dequeue();
+                //System.out.println("pegando " + n);
+                status.Explorando(n, abertos.Count);
+                if (n.Estado.EhMeta())
+                {
+                    status.Termina(true);
+                    return n;
+                }
+
+                var sucessores = Sucessores(n);
+                foreach (var sucessor in sucessores)
+                {
+                    abertos.Enqueue(sucessor);
+                }
+            }
+            status.Termina(false);
+            return null;
+        }
+
+        public override string ToString()
+        {
+            return "BL - Busca em Largura";
+        }
+    }
+}
