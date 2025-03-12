@@ -1,0 +1,85 @@
+using System;
+using System.Collections.Generic;
+
+/// <summary>
+/// Algoritmos de Busca A*
+public class AEstrela : BuscaHeuristica
+{
+    private int maxF = -1; // max F
+    private int maxAbertos = -1; // max abertos
+    private Nodo theBest;
+
+    /// Busca sem mostrar status
+    public AEstrela() { }
+
+    /// Busca mostrando status
+    public AEstrela(MostraStatusConsole ms) : base(ms) { }
+
+    /// Seta o limite para f(), -1 é ilimitado
+    public void SetMaxF(int m)
+    {
+        maxF = m;
+    }
+
+    /// Seta o limite para o número de abertos, -1 é ilimitado
+    public void SetMaxAbertos(int m)
+    {
+        maxAbertos = m;
+    }
+
+    public Nodo GetTheBest()
+    {
+        return theBest;
+    }
+
+    /// Busca a solução por busca heurística.
+    /// Baseado no Russell & Norvig
+    public Nodo Busca(Estado inicial)
+    {
+        status.Inicia();
+        InitFechados();
+
+        PriorityQueue<Nodo, int> abertos = new PriorityQueue<Nodo, int>(); // lista ordenada por f()
+        Nodo nInicial = new Nodo(inicial, null);
+        abertos.Enqueue(nInicial, nInicial.F());
+        theBest = nInicial; // o melhor nodo já gerado
+
+        while (!parar && abertos.Count > 0)
+        {
+            Nodo melhor = abertos.Dequeue();
+            status.Explorando(melhor, abertos.Count);
+            
+            if (melhor.estado.EhMeta())
+            {
+                status.Termina(true);
+                return melhor;
+            }
+
+            if (maxF < 0 || melhor.F() < maxF)
+            {
+                foreach (var suc in Sucessores(melhor))
+                {
+                    abertos.Enqueue(suc, suc.F());
+                }
+            }
+            
+            if (maxAbertos > 0 && abertos.Count > maxAbertos)
+            {
+                break;
+            }
+            
+            if (melhor.F() < theBest.F())
+            {
+                theBest = melhor;
+            }
+        }
+        
+        status.Termina(false);
+        return null;
+    }
+
+    public override string ToString()
+    {
+        return "A* - busca heurística";
+    }
+}
