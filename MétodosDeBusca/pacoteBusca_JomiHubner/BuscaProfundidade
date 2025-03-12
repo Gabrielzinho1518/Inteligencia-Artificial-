@@ -1,0 +1,75 @@
+using System;
+using System.Collections.Generic;
+
+namespace Busca
+{
+    /**
+     * Algoritmos de Busca (geral, qualquer problema)
+     * Busca a solução por busca em profundidade.
+     *
+     * @author Jomi Fred Hübner
+     */
+    public class BuscaProfundidade : Busca
+    {
+        protected int profMax = 40;
+
+        /** busca sem mostrar status */
+        public BuscaProfundidade()
+        {
+        }
+
+        public BuscaProfundidade(int m)
+        {
+            profMax = m;
+        }
+
+        /** busca mostrando status */
+        public BuscaProfundidade(MostraStatusConsole ms) : base(ms)
+        {
+        }
+
+        public BuscaProfundidade(int m, MostraStatusConsole ms) : base(ms)
+        {
+            profMax = m;
+        }
+
+        public void SetProfMax(int m)
+        {
+            profMax = m;
+        }
+
+        public Nodo Busca(Estado inicial)
+        {
+            status.Inicia();
+            InitFechados();
+
+            List<Nodo> abertos = new List<Nodo>();
+            abertos.Add(new Nodo(inicial, null));
+
+            while (!parar && abertos.Count > 0)
+            {
+                Nodo n = abertos[0];
+                abertos.RemoveAt(0);
+                status.Explorando(n, abertos.Count);
+                if (n.Estado.EhMeta())
+                {
+                    status.Termina(true);
+                    return n;
+                }
+
+                if (n.GetProfundidade() < profMax)
+                {
+                    var sucessores = Sucessores(n);
+                    abertos.InsertRange(0, sucessores);
+                }
+            }
+            status.Termina(false);
+            return null;
+        }
+
+        public override string ToString()
+        {
+            return "BP - Busca em Profundidade";
+        }
+    }
+}
