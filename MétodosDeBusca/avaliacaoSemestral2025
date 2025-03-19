@@ -1,0 +1,47 @@
+1: O que são métodos de busca ( Solução de problemas ) : 
+Os métodos de busca são basicamente algoritmos que são feitos para encontrar um elemento dentro de uma estrutura, muito utilizado em listas.
+As categorias de métodos de busca e suas aplicações
+- Categorias:
+ - Busca cega ou força bruta:
+ - profundidade = método clássico de dedução
+ - amplitude/largura
+
+- Busca heurística ou baseada em dicas:
+ - Subida de encosta (Climb Hill)
+ - Guloso
+ - A*(Estrela)
+
+Busca em Profundidade:
+Descrição: Explora o máximo possível um caminho antes de retroceder e explorar outros.
+Exemplo: Percorrendo um labirinto indo sempre em uma direção até encontrar uma barreira.
+Aplicação: Resolução de quebra-cabeças, análise de redes e compiladores.
+
+Busca em Amplitude:
+Descrição: Explora todos os vizinhos de um nó antes de avançar para o próximo nível.
+Exemplo: Encontrar o menor caminho entre cidades em um mapa.
+Aplicação: Roteamento de redes, IA para jogos e sistemas de recomendação.
+
+Subida de Encosta:
+Descrição: Parte de uma solução inicial e faz pequenas mudanças para melhorar iterativamente.
+Exemplo: Otimização de funções matemáticas.
+Aplicação: Inteligência artificial, ajuste de hiperparâmetros em aprendizado de máquina.
+
+Busca Gulosa:
+Descrição: Escolhe sempre a melhor opção local no momento, sem se preocupar com o futuro.
+Exemplo: Algoritmo de Prim para encontrar a árvore geradora mínima.
+Aplicação: Redes de comunicação.
+
+Algoritmo A* (Estrela): 
+Descrição: Combina a busca em largura com heurísticas para encontrar o caminho mais curto.
+Exemplo: Navegação de GPS escolhendo a rota mais rápida.
+Aplicação: Jogos, robótica, inteligência artificial e sistemas de logística.
+
+Modelar a solução com alguma técnica de IA 
+  1) mapear os estados possíveis do problema 
+    - definir classe e seus atributos 
+    - definir o estado inicial e o estado(s) finals(is) 
+  2) mapear os métodos das classes - Regras de Transição 
+  3) mapear as restrições - método ehVálido()
+  4) forma de mapear os visitados - HashSet ou uma árvore 
+    - gerar uma string dos atributos daquele estado / objeto 
+  5) definir o método meta ou objetivo 
