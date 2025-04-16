@@ -6,7 +6,7 @@ from Cromossomo import Cromossomo
 
 tamanho_populacao = int(input('Tamanho da população: '))
 quantidade_geracoes = int(input('Gerações: '))
-taxa_selecao = int(input('Taxa de seleção [25 a 30]: '))
+taxa_selecao = int(input('Taxa de seleção [25 a 75]: '))
 taxa_reproducao = 100 - taxa_selecao
 frequencia_mutacao = int(input('Frequencia de mutação: '))
 
