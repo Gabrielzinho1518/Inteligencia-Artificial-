@@ -1,0 +1,43 @@
+%fatos ou verdades
+nasceuEm("Gabriel","Porto Alegre").
+nasceuEm("Matheus","Santa Maria").
+nasceuEm("Maria","São Gabriel").
+nasceuEm("Helvio","Santa Maria").
+nasceuEm("Mariza","Santa Maria").
+nasceuEm("Marica","Santa Maria").
+
+%regra recursiva de sobrecarga
+nasceuEm(Pessoa, Lugar):- 
+    nasceuEm(Pessoa, I),
+    estaEm(I, Lugar).
+
+localizadoEm("Santa Maria","RS").
+localizadoEm("Porto Alegre","RS").
+localizadoEm("São Gabriel","RS").
+localizadoEm("RS","Brasil").
+
+%regra recursiva
+estaEm(Lugar, OutroLugar) :-
+    localizadoEm(Lugar, OutroLugar).
+estaEm(Lugar, OutroLugar) :-
+    localizadoEm(Lugar, I),
+    estaEm(I, OutroLugar).
+
+progenitor("Helvio","Gabriel").
+progenitor("Helvio","Matheus").
+progenitor("Marica","Helvio").
+progenitor("Marica","Mariza").
+progenitor("Mariza","Giam").
+
+vo(Vo, Neto) :-
+    progenitor(vo, Mae),
+    progenitor(Mae, Neto).
+
+irmao(I1, I2) :-
+    progenitor(Pai,I1),
+    progenitor(Pai,I2),
+    I1 \= I2.
+
+tio(Tio,Sobrinho) :-
+    irmao(Tio,Pai),
+    progenitor(Pai,Sobrinho).
