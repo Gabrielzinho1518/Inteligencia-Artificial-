@@ -1,0 +1,16 @@
+viagens(5).
+ 
+!start.
+ 
++!start : viagens(Qtd)
+<-         
+        .print("estou pronto para guardar peças médias e grandes... e tenho ", Qtd," viagens disponíveis").
+ 
++peca(Tamanho) : viagens(Qtd) & Qtd > 0 & Tamanho = media
+<-
+        .print("percebi uma peça ", Tamanho, " e vou guarda-la... porque ainda tenho ", Qtd, " viagens possíveis");
+        .wait(5000);
+        guardarPeca(Tamanho); //ação a ser executada no ambiente, logo no java
+        -viagens(Qtd);
+        NovaQtd = Qtd - 1;
+        +viagens(NovaQtd).
